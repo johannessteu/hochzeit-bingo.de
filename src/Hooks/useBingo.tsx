@@ -1,4 +1,12 @@
-import React, { createContext, Provider, useContext, useState } from "react";
+import React, {
+  createContext,
+  Provider,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 interface BingoContextInterface {
   numbers: number[][];
@@ -22,7 +30,7 @@ const BingoProvider: React.FC = ({ children }) => {
   const [bride, setBride] = useState("");
   const [maid, setMaid] = useState("");
 
-  const shuffleNumbers = (amount: number) => {
+  const shuffleNumbers = useCallback((amount: number) => {
     const n: number[] = [];
 
     while (n.length < amount) {
@@ -42,7 +50,7 @@ const BingoProvider: React.FC = ({ children }) => {
 
     setNumbers(chunkedNumbers);
     setNumberAmount(amount);
-  };
+  }, []);
 
   return (
     <BingoContext.Provider

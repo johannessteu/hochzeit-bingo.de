@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
@@ -13,6 +13,8 @@ import { useBingoContext } from "../Hooks/useBingo";
 const Configurator: React.FC = ({ children }) => {
   const { shuffleNumbers, numberAmount } = useBingoContext();
 
+  useEffect(() => shuffleNumbers(numberAmount), [shuffleNumbers, numberAmount]);
+
   return (
     <div>
       {children}
@@ -21,6 +23,7 @@ const Configurator: React.FC = ({ children }) => {
       </Text>
 
       <Slider
+        defaultValue={numberAmount}
         onChange={(value) => {
           shuffleNumbers(
             Math.ceil(Math.sqrt(value)) * Math.ceil(Math.sqrt(value))

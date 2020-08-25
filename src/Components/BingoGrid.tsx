@@ -1,22 +1,37 @@
 import React from "react";
-import { Box } from "@chakra-ui/core";
+import { Box, Flex } from "@chakra-ui/core";
 import { useBingoContext } from "../Hooks/useBingo";
 
 const BingoGrid: React.FC = () => {
-  const { numbers } = useBingoContext();
+  const { numbers, numberAmount } = useBingoContext();
 
   return (
-    <>
-      {numbers.map((row) => (
-        <Box border="1 px solid">
-          {row.map((number) => (
-            <Box p={4} m={2}>
+    <Flex direction="column" w="100%" mr={3}>
+      {numbers.map((row, idx) => (
+        <Flex
+          // eslint-disable-next-line react/no-array-index-key
+          key={idx}
+          style={{
+            borderLeft: "1px solid black",
+            borderRight: "1px solid black",
+          }}
+        >
+          {row.map((number, idy) => (
+            <Flex
+              // eslint-disable-next-line react/no-array-index-key
+              key={idy}
+              width={`${100 / row.length}%`}
+              height="50px"
+              style={{ border: "1px solid black" }}
+              justify="center"
+              align="center"
+            >
               {number}
-            </Box>
+            </Flex>
           ))}
-        </Box>
+        </Flex>
       ))}
-    </>
+    </Flex>
   );
 };
 
