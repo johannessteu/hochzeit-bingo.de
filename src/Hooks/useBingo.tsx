@@ -1,17 +1,11 @@
-import React, {
-  createContext,
-  Provider,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 
 interface BingoContextInterface {
   numbers: number[][];
   bride: string;
-  maid: string;
+  setBride: (b: string) => void;
+  setGroom: (b: string) => void;
+  groom: string;
   numberAmount: number;
   shuffleNumbers: (cnt: number) => void;
 }
@@ -27,8 +21,8 @@ const randomInt = (max: number) => {
 const BingoProvider: React.FC = ({ children }) => {
   const [numbers, setNumbers] = useState<number[][]>([[]]);
   const [numberAmount, setNumberAmount] = useState(16);
-  const [bride, setBride] = useState("");
-  const [maid, setMaid] = useState("");
+  const [bride, setBride] = useState("Jutta");
+  const [groom, setGroom] = useState("Olaf");
 
   const shuffleNumbers = useCallback((amount: number) => {
     const n: number[] = [];
@@ -54,7 +48,15 @@ const BingoProvider: React.FC = ({ children }) => {
 
   return (
     <BingoContext.Provider
-      value={{ numbers, numberAmount, bride, maid, shuffleNumbers }}
+      value={{
+        numbers,
+        numberAmount,
+        bride,
+        groom,
+        setBride,
+        setGroom,
+        shuffleNumbers,
+      }}
     >
       {children}
     </BingoContext.Provider>
