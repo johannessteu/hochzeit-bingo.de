@@ -38,6 +38,7 @@ const TitleText = styled(Heading)`
   font-family: "Bilbo Swash Caps", cursive;
   text-align: center;
   padding-left: 75px;
+  right: 75px;
   font-size: 3rem !important;
 `;
 
