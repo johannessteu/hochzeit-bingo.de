@@ -40,7 +40,6 @@ const Configurator: React.FC = ({ children }) => {
   return (
     <div>
       {children}
-
       <Text mt={4} fontWeight="bold">
         Wie heißt die Braut?
       </Text>
@@ -50,7 +49,6 @@ const Configurator: React.FC = ({ children }) => {
           setBride(event.target.value)
         }
       />
-
       <Text mt={4} fontWeight="bold">
         Wie heißt der Bräutigam?
       </Text>
@@ -60,12 +58,10 @@ const Configurator: React.FC = ({ children }) => {
           setGroom(event.target.value)
         }
       />
-
       <Text fontWeight="bold" mt={4}>
         Wie viele Fragen soll es geben?
       </Text>
       <Text>{numberAmount}</Text>
-
       <Slider
         defaultValue={numberAmount}
         onChange={(value) => {
@@ -81,12 +77,10 @@ const Configurator: React.FC = ({ children }) => {
         <SliderFilledTrack />
         <SliderThumb />
       </Slider>
-
       <Text fontWeight="bold" mt={4}>
         Wie viele Joker soll es pro Blatt geben?
       </Text>
       <Text>{wildcard}</Text>
-
       <Slider
         defaultValue={wildcard}
         onChange={(value) => shuffleNumbers(numberAmount, value)}
@@ -97,7 +91,6 @@ const Configurator: React.FC = ({ children }) => {
         <SliderFilledTrack />
         <SliderThumb />
       </Slider>
-
       <Text mt={4} fontWeight="bold">
         Wie viele Spielblätter benötigst du?
       </Text>

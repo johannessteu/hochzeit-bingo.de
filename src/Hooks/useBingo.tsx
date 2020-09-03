@@ -42,6 +42,7 @@ const BingoProvider: React.FC = ({ children }) => {
 
   const generateNumbers = (amount: number, wildcard: number) => {
     const n: number[] = [];
+    let setWildcards = 0;
 
     while (n.length < amount) {
       const nextInt = randomInt(amount);
@@ -54,8 +55,12 @@ const BingoProvider: React.FC = ({ children }) => {
     const chunkSize = Math.sqrt(amount);
     const chunkedNumbers: number[][] = [];
 
-    for (let i = 0; i < wildcard; i += 1) {
-      n[Math.floor(Math.random() * n.length)] = 999;
+    while (setWildcards < wildcard) {
+      const rnd = Math.floor(Math.random() * n.length);
+      if (n[rnd] !== 999) {
+        n[rnd] = 999;
+        setWildcards += 1;
+      }
     }
 
     for (let i = 0; i < chunkSize; i += 1) {

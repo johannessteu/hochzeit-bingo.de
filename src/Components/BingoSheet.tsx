@@ -1,4 +1,3 @@
-import { Flex } from "@chakra-ui/core";
 import React from "react";
 import { Document, Text, View, StyleSheet, Page } from "@react-pdf/renderer";
 import styled from "@react-pdf/styled-components";
@@ -13,7 +12,6 @@ const styles = StyleSheet.create({
   copyright: {
     fontSize: "16",
     fontFamily: "Oswald",
-
     width: "100%",
     textAlign: "center",
   },
