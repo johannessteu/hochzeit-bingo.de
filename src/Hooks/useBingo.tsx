@@ -7,15 +7,16 @@ import BingoSheet from "../Components/BingoSheet";
 interface BingoContextInterface {
   numbers: number[][];
   bride: string;
+  wildcard: number;
   setBride: (b: string) => void;
   setGroom: (b: string) => void;
   groom: string;
   sheets: number;
   setSheets: (n: number) => void;
   numberAmount: number;
-  shuffleNumbers: (a: number) => void;
+  shuffleNumbers: (a: number, w: number) => void;
   downloadPdf: () => void;
-  generateNumbers: (n: number) => number[][];
+  generateNumbers: (n: number, w: number) => number[][];
 }
 
 Font.register({
@@ -34,11 +35,12 @@ const randomInt = (max: number) => {
 const BingoProvider: React.FC = ({ children }) => {
   const [numbers, setNumbers] = useState<number[][]>([[]]);
   const [numberAmount, setNumberAmount] = useState(25);
+  const [wildcard, setWildcard] = useState(0);
   const [sheets, setSheets] = useState(5);
   const [bride, setBride] = useState("Jutta");
   const [groom, setGroom] = useState("Olaf");
 
-  const generateNumbers = (amount: number) => {
+  const generateNumbers = (amount: number, wildcard: number) => {
     const n: number[] = [];
 
     while (n.length < amount) {
@@ -52,6 +54,10 @@ const BingoProvider: React.FC = ({ children }) => {
     const chunkSize = Math.sqrt(amount);
     const chunkedNumbers: number[][] = [];
 
+    for (let i = 0; i < wildcard; i += 1) {
+      n[Math.floor(Math.random() * n.length)] = 999;
+    }
+
     for (let i = 0; i < chunkSize; i += 1) {
       chunkedNumbers.push(n.slice(i * chunkSize, i * chunkSize + chunkSize));
     }
@@ -59,18 +65,17 @@ const BingoProvider: React.FC = ({ children }) => {
     return chunkedNumbers;
   };
 
-  const shuffleNumbers = useCallback((amount: number) => {
-    const n = generateNumbers(amount);
+  const shuffleNumbers = useCallback((amount: number, w: number) => {
+    const n = generateNumbers(amount, w);
     setNumbers(n);
+    setWildcard(w);
     setNumberAmount(amount);
   }, []);
 
   const downloadPdf = async () => {
-    console.log(generateNumbers(numberAmount));
-
     const gameNumbers = new Array(sheets)
       .fill("")
-      .map(() => generateNumbers(numberAmount));
+      .map(() => generateNumbers(numberAmount, wildcard));
 
     const blob = await pdf(
       <BingoSheet numbers={gameNumbers} bride={bride} groom={groom} />
@@ -90,6 +95,7 @@ const BingoProvider: React.FC = ({ children }) => {
         groom,
         setBride,
         setGroom,
+        wildcard,
         shuffleNumbers,
         generateNumbers,
         downloadPdf,

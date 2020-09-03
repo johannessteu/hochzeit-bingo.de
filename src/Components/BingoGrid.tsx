@@ -86,7 +86,7 @@ const BingoGrid: React.FC<{
                 isFirst={idy === 0}
               >
                 <Flex fontSize="2rem" align="center" justify="center">
-                  {number}
+                  {number === 999 ? "X" : number}
                 </Flex>
               </BingoBox>
             ))}

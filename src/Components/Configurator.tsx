@@ -25,12 +25,17 @@ const Configurator: React.FC = ({ children }) => {
     bride,
     setBride,
     setGroom,
+    wildcard,
     sheets,
     setSheets,
     groom,
   } = useBingoContext();
 
-  useEffect(() => shuffleNumbers(numberAmount), [shuffleNumbers, numberAmount]);
+  useEffect(() => shuffleNumbers(numberAmount, wildcard), [
+    shuffleNumbers,
+    wildcard,
+    numberAmount,
+  ]);
 
   return (
     <div>
@@ -65,7 +70,8 @@ const Configurator: React.FC = ({ children }) => {
         defaultValue={numberAmount}
         onChange={(value) => {
           shuffleNumbers(
-            Math.ceil(Math.sqrt(value)) * Math.ceil(Math.sqrt(value))
+            Math.ceil(Math.sqrt(value)) * Math.ceil(Math.sqrt(value)),
+            wildcard
           );
         }}
         max={36}
@@ -75,6 +81,23 @@ const Configurator: React.FC = ({ children }) => {
         <SliderFilledTrack />
         <SliderThumb />
       </Slider>
+
+      <Text fontWeight="bold" mt={4}>
+        Wie viele Joker soll es pro Blatt geben?
+      </Text>
+      <Text>{wildcard}</Text>
+
+      <Slider
+        defaultValue={wildcard}
+        onChange={(value) => shuffleNumbers(numberAmount, value)}
+        max={numberAmount}
+        min={0}
+      >
+        <SliderTrack />
+        <SliderFilledTrack />
+        <SliderThumb />
+      </Slider>
+
       <Text mt={4} fontWeight="bold">
         Wie viele Spielblätter benötigst du?
       </Text>

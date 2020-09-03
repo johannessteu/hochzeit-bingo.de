@@ -1,3 +1,4 @@
+import { Flex } from "@chakra-ui/core";
 import React from "react";
 import { Document, Text, View, StyleSheet, Page } from "@react-pdf/renderer";
 import styled from "@react-pdf/styled-components";
@@ -43,7 +44,7 @@ const Tile: React.FC<{
           height: `${size}px`,
         }}
       >
-        {number}
+        {number === 999 ? "X" : number}
       </NumberText>
     </View>
   );
