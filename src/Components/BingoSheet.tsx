@@ -74,7 +74,13 @@ const BingoSheet: React.FC<{
             </View>
             {n.map((row, i) => {
               return (
-                <View style={{ top: "70px", left: "10%", width: "80%" }}>
+                <View
+                  style={{
+                    top: "70px",
+                    left: row.length > 4 ? "10%" : "17%",
+                    width: "80%",
+                  }}
+                >
                   {row.map((cell, idx) => (
                     <Tile
                       cnt={row.length}
