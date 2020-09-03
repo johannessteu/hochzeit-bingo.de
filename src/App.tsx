@@ -11,13 +11,22 @@ import styled from "@emotion/styled";
 import React from "react";
 import BingoGrid from "./Components/BingoGrid";
 import Configurator from "./Components/Configurator";
-import { BingoProvider } from "./Hooks/useBingo";
+import { BingoProvider, useBingoContext } from "./Hooks/useBingo";
 
 const customTheme = {
   ...theme,
 };
 
 const Sidebar = styled(Box)``;
+
+const Content: React.FC = () => {
+  const { numbers, bride, groom } = useBingoContext();
+  return (
+    <Flex width={["100%", "100%", 0.5]} wrap="wrap">
+      <BingoGrid numbers={numbers} bride={bride} groom={groom} />
+    </Flex>
+  );
+};
 
 const App: React.FC = () => {
   return (
@@ -39,9 +48,7 @@ const App: React.FC = () => {
           wrap={["wrap-reverse", "wrap-reverse", "wrap"]}
           h="auto"
         >
-          <Flex width={["100%", "100%", 0.5]}>
-            <BingoGrid />
-          </Flex>
+          <Content />
           <Sidebar
             borderRadius="4px"
             boxShadow="rgba(0, 0, 0, 0.35) 0px 2px 10px"
@@ -55,7 +62,7 @@ const App: React.FC = () => {
             </Heading>
             <Text>
               Wähle hier deine Einstellungen aus und erstelle dir ein
-              Spielplatt.
+              Spielplatt. Auf der linken Seite siehst du eine Vorschau.
             </Text>
             <Configurator />
           </Sidebar>

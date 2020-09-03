@@ -1,15 +1,14 @@
+import {
+  AspectRatioBox,
+  AspectRatioBoxProps,
+  Box,
+  Flex,
+  FlexProps,
+  Heading,
+} from "@chakra-ui/core";
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import React from "react";
-import {
-  Flex,
-  FlexProps,
-  AspectRatioBox,
-  AspectRatioBoxProps,
-  Heading,
-  Box,
-} from "@chakra-ui/core";
-import { useBingoContext } from "../Hooks/useBingo";
 
 const BingoBox = styled<React.FC<AspectRatioBoxProps>, { isFirst: boolean }>(
   AspectRatioBox
@@ -51,9 +50,11 @@ const Heart = styled(Box)`
   transform: rotate(-15deg);
 `;
 
-const BingoGrid: React.FC = () => {
-  const { numbers, bride, groom } = useBingoContext();
-
+const BingoGrid: React.FC<{
+  numbers: number[][];
+  bride: string;
+  groom: string;
+}> = ({ numbers, bride, groom }) => {
   return (
     <Flex direction="column" w="100%" mr={3} pos="relative">
       <TitleText my={5} as="h3">
