@@ -34,8 +34,8 @@ const randomInt = (max: number) => {
 
 const BingoProvider: React.FC = ({ children }) => {
   const [numbers, setNumbers] = useState<number[][]>([[]]);
-  const [numberAmount, setNumberAmount] = useState(25);
-  const [wildcard, setWildcard] = useState(0);
+  const [numberAmount, setNumberAmount] = useState(16);
+  const [wildcard, setWildcard] = useState(1);
   const [sheets, setSheets] = useState(5);
   const [bride, setBride] = useState("Jutta");
   const [groom, setGroom] = useState("Olaf");
