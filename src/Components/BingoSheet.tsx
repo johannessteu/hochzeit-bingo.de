@@ -10,6 +10,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Oswald",
   },
+  copyright: {
+    fontSize: "16",
+    fontFamily: "Oswald",
+
+    width: "100%",
+    textAlign: "center",
+  },
   tile: {
     top: -20,
     margin: 0,
@@ -80,6 +87,9 @@ const BingoSheet: React.FC<{
                 </View>
               );
             })}
+            <View style={[styles.copyright, { top: 720 }]}>
+              <Text>hochzeit-bingo.de</Text>
+            </View>
           </Page>
         );
       })}
